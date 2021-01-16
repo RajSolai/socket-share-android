@@ -3,4 +3,6 @@
     <string name="title_home">Send</string>
     <string name="title_dashboard">Receive</string>
     <string name="title_notifications">Notifications</string>
+    <string name="enter_ip">Enter the Reciver Address</string>
+    <string name="enter_path">"Enter the File Path "</string>
 </resources>
