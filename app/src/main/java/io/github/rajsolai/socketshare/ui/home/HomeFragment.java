@@ -26,6 +26,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     public byte[] file;
+    public File filetosend;
     public String filepath;
     boolean result = false;
 
@@ -35,41 +36,26 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final Button button = root.findViewById(R.id.button);
-        final EditText input = root.findViewById(R.id.editTextTextPersonName);
+        final EditText reciver_address_input = root.findViewById(R.id.editTextTextPersonName);
+        final EditText file_address_input = root.findViewById(R.id.editTextTextPersonName2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //openFile("./");
-                File ssam = new File("/storage/emulated/0/Documents/cnlabchecksum.pdf");
-                Log.d("file", String.valueOf(ssam.exists()));
+                filepath = file_address_input.getText().toString();
+                checkFile(filepath);
             }
         });
         return root;
     }
 
-    private void openFile(String pickerInitialUri) {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("application/pdf");
-
-        // Optionally, specify a URI for the file that should appear in the
-        // system file picker when it loads.
-        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri);
-        intent.putExtra("result",result);
-        startActivityForResult(intent, 2);
-        Bundle useless = intent.getExtras();
-        Log.d("uri",useless.toString());
+    protected void checkFile(String filepath){
+        filetosend = new File("/storage/emulated/0/"+filepath);
+        if(filetosend.exists()){
+            Toast.makeText(getContext(),"Sending File \uD83D\uDE80️",Toast.LENGTH_LONG).show();
+            /* TODO code send file method */
+        }else{
+            Toast.makeText(getContext(),"File not found️",Toast.LENGTH_LONG).show();
+        }
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)  {
-        super.onActivityResult(requestCode, resultCode, data);
-        Uri content_describer = data.getData();
-        File sample = new File(content_describer.getPath());
-        Log.d("uri",sample.getName());
-        Log.d("uri",content_describer.toString());
-        Log.d("uri",sample.getParent());
-    }
-
 
 }
