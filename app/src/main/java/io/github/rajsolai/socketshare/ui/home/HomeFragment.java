@@ -24,7 +24,6 @@ import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
     public byte[] file;
     public File filetosend;
     public String filepath;
@@ -32,8 +31,6 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final Button button = root.findViewById(R.id.button);
         final EditText reciver_address_input = root.findViewById(R.id.editTextTextPersonName);
